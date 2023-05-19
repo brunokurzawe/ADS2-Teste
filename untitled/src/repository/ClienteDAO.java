@@ -17,4 +17,25 @@ public class ClienteDAO {
         return clientes;
     }
 
+    public static List<Cliente> buscarPorNome(String nome) {
+        List<Cliente> clientesFiltradas = new ArrayList<>();
+        for (Cliente pessoa : clientes) {
+            if (pessoa.getNome().contains(nome)) {
+                clientesFiltradas.add(pessoa);
+            }
+        }
+        return clientesFiltradas;
+    }
+
+    public static Object[] findClientesInArray() {
+        List<Cliente> clientes = buscaTodos();
+        List<String> clienteNomes = new ArrayList<>();
+
+        for (Cliente cliente : clientes) {
+            clienteNomes.add(cliente.getNome());
+        }
+
+        return clienteNomes.toArray();
+    }
+
 }
