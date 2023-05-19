@@ -7,11 +7,13 @@ public class Venda {
     private LocalDate dataVenda;
     private Produto produto;
     private Cliente cliente;
+    private FormaPagamento formaPagamento;
 
-    public Venda(Produto produto, Cliente cliente, LocalDate dataVenda) {
+    public Venda(LocalDate dataVenda, Produto produto, Cliente cliente, FormaPagamento formaPagamento) {
+        this.dataVenda = dataVenda;
         this.produto = produto;
         this.cliente = cliente;
-        this.dataVenda = dataVenda;
+        this.formaPagamento = formaPagamento;
     }
 
     public Produto getProduto() {
@@ -26,12 +28,17 @@ public class Venda {
         return dataVenda;
     }
 
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
     @Override
     public String toString() {
         return "Venda{" +
                 "dataVenda=" + dataVenda +
                 ", produto=" + produto +
                 ", cliente=" + cliente +
+                ", formaPagamento=" + formaPagamento +
                 '}';
     }
 }

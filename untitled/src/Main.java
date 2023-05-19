@@ -1,4 +1,5 @@
 import model.Cliente;
+import model.FormaPagamento;
 import model.Produto;
 import model.Venda;
 import repository.ClienteDAO;
@@ -103,8 +104,22 @@ public class Main {
                 "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesProdutos, initialSelectionSeguradora);
         List<Produto> produtos = ProdutoDAO.buscarPorNome((String) selectionSeguradora);
 
-        Venda venda = new Venda(produtos.get(0), clientes.get(0), dataVenda);
+        Object[] selectionFormaPagto = {"A vista", "A prazo", "Cartão"};
+        String initialSelectionForma = (String) selectionFormaPagto[0];
+        Object selectionForma = JOptionPane.showInputDialog(null, "Selecione o cliente da venda?",
+                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionFormaPagto, initialSelectionForma);
 
+        FormaPagamento formaPagamento = FormaPagamento.CARTAO;
+        if (selectionForma.equals("A vista")) {
+            formaPagamento = FormaPagamento.AVISTA;
+        } else if (selectionForma.equals("A prazo")) {
+            formaPagamento = formaPagamento.APRAZO;
+        }
+
+        Venda venda = new Venda(dataVenda, produtos.get(0), clientes.get(0), formaPagamento);
+
+
+        System.out.println(venda);
         VendaDAO.salvar(venda);
 
     }
